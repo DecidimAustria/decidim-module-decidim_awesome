@@ -21,6 +21,14 @@ ca:
         scoped_admins: 'Grup d''administradores acotades #%{id}'
         scoped_styles: 'Personalització d''estils #%{id}'
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
+        validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
+        validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
+        validate_body_min_length: Nombre de caràcters mínims requerits pel cos de la proposta
+        validate_body_start_with_caps: Força que el text del cos s'inici amb una majúscula
+        validate_title_max_caps_percent: Percentatge màxim de majúscules en el títol de la proposta
+        validate_title_max_marks_together: Nombre màxim de símbols consecutius permesos al títol de la proposta
+        validate_title_min_length: Nombre de caràcters mínims requerits pel títol de la proposta
+        validate_title_start_with_caps: Força que el text del títol s'inici amb una majúscula
       constraint:
         component_id: o específicament a
         component_manifest: Només en components de tipus
@@ -42,7 +50,23 @@ ca:
         proposal_custom_fields: Camps personalitzats
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Tipus de rol
+          participatory_space_type_eq:
+            label: Tipus d'espai participatiu
+          role:
+            label: Rol
+          role_type_eq:
+            label: Tipus de rol
+        label:
+          search_field_end_date: 'Fins al dia:'
+          search_field_start_date: 'Des del dia:'
+        search_placeholder:
+          user_name_or_user_email_cont: Cerca per nom de participant, email
       menu:
+        admin_accountability: Històric d'administradores
         decidim_awesome: Decidim Awesome
     components:
       awesome_iframe:
@@ -83,6 +107,41 @@ ca:
             show_withdrawn: Mostra les propostes retirades
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Administradora de plataforma
+            user_manager: Administradora de participants
+          created_at: Rol creat el
+          currently_active: Actiu
+          deleted_user: Rol eliminat
+          email: Email
+          exports:
+            button: Exporta aquesta cerca
+            export_as: Exporta com %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: L'exportació s'està enviant. Rebràs un correu electrònic quan estigui llest.
+          index:
+            description: Aquí trobareu totes les participants que han tingut algun paper en l'administració d'un espai participatiu. Les administradores de plataforma no apareixen a la llista.
+            global_description: Aquí trobareu totes les participants que han tingut algun paper en l'administració de la plataforma. Les administradores d'un espai participatiu no apareixen a la llista.
+            see_global: Llista global d'administradores de plataforma
+            see_spaces: Llista global d'administradores d'un espai participatiu
+            title: Històric d'administradores
+          last_login: Darrera data d'identificació
+          missing_info: "(falta informació)"
+          missing_user: La participant no existeix a la base de dades
+          name: Nom
+          never_logged: No loguejat encara
+          participatory_space: Espai participatiu
+          removal_date: Rol eliminat el
+          role: Rol
+          roles:
+            admin: Administradora
+            collaborator: Col·laboradora
+            moderator: Moderadora
+            valuator: Avaluadora
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
@@ -151,6 +210,15 @@ ca:
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
+              validate_body_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
+              validate_body_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
+              validate_body_min_length: Aquest nombre pot ser zero, això farà que aquest camp no sigui obligatori
+              validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
+              validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
+              validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
+            validators:
+              body: Validacions d'entrada per l'usuari en el camp cos de la proposta
+              title: Validacions d'entrada per l'usuari en el camp títol de la proposta
           form_proposal_custom_fields:
             new: Afegeix una nova caixa de "camps personalitzats"
             remove: Elimina aquesta caixa de "camps personalitzats"
@@ -260,6 +328,7 @@ ca:
               hidden: Sempre ocult
               logged: Només visible per usuàries loguejades
               non_logged: Només visible per usuàries no loguejades
+              verified_user: Només visible per als usuaris amb una autorització vàlida
           index:
             confirm_destroy: Confirmes que vols eliminar aquest retoc?
             edit: Editar
@@ -302,7 +371,7 @@ ca:
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
-      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
+      credits: Decidim Awesome %{version} · Mantingut amb ♥ per %{company}
       custom_fields:
         errors:
           invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
@@ -313,7 +382,7 @@ ca:
           success: Imatge pujada correctament
       map_component:
         map:
-          api_not_ready: |2
+          api_not_ready: |
             <b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada amb una complexitat màxima de <b>%{current_complexity}</b>.
             Aquest component probablement no funcionarà amb aquesta configuració. Us recomanem que la configureu en un inicialitzador
             (per exemple, al final de <code>config/initializers/decidim.rb</code>) hi poseu les línies següents:<br>
@@ -328,6 +397,8 @@ ca:
           show:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
+      validators:
+        too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
   layouts:
     decidim:
       admin:
